@@ -1,11 +1,11 @@
 import React from 'react';
-import { Upload } from './components/Upload'
+import CardContainer from './components/CardContainer'
 
 const App = () => {
     return(
         <div>
             <h1>Online Art Gallery</h1>
-            <Upload />
+            <CardContainer />
         </div>
     )
 }
