@@ -1,12 +1,18 @@
 import React from 'react';
 import CardContainer from './components/CardContainer'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { CardComponent } from './components/CardComponent';
+import { Upload } from './components/Upload'
+
 
 const App = () => {
     return(
-        <div>
-            <h1>Online Art Gallery</h1>
-            <CardContainer />
-        </div>
+   <>
+   <Routes>
+   <Route path='/main' element={ <CardContainer />} />
+    <Route path='/upload' element={ <Upload />} />
+   </Routes>
+  </>
     )
 }
 

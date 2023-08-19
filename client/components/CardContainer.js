@@ -17,11 +17,14 @@ const CardContainer = () => {
   }, []);
 
   return (
+    <>
+    <h1>card container</h1>
     <div className="image-container">
       {images.map((image) => (
         <CardComponent key={image.id} image={image} />
       ))}
     </div>
+    </>
   );
 };
 
