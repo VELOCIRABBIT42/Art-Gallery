@@ -1,40 +1,34 @@
 const express = require('express');
-const cors = require('cors');
-
 const app = express();
+const path = require('path');
 const PORT = 3000;
-
-
+const authRouter = require('./routers/authRouter');
 const galleryRouter = require('./routers/galleryRouter');
 
+app.use(express.json());
 
-
-app.use(express.json())
-
-// app.get('/', (req, res) => {
-//     res.send('Quinn & Sharmarke, let\'s goooooooo!')
-// })
-
+// Define auth route handler
+app.use('/auth', 
+  (req, res, next) => {
+    console.log('routed to /auth');
+    return next();
+  },
+  authRouter
+);
 
 app.use('/gallery', galleryRouter, (req, res)=> {
   res.status(200).json(res.locals.images)
 });
 
-
 app.use('/upload', galleryRouter, (req, res)=> {
   res.status(200).json(res.locals.newImage)
 });
-
-
 
 app.use((req,res) => {
   res.status(404).send('Not found.')
 });
 
-
-
-
-
+// Error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error.',
@@ -46,13 +40,8 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-
-
-
-
-
-
-
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 })
+
+module.exports = app;
