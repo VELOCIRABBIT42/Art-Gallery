@@ -35,9 +35,9 @@ async function checkIfInputMatches(username, password) {
   }
 }
 
-async function generateHashedPassword(password) {
-  const salt = bcrypt.genSaltSync(12);
-}
+// async function generateHashedPassword(password) {
+//   const salt = bcrypt.genSaltSync(12);
+// }
 
 // METHODS ==================================================
 
