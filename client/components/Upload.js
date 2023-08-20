@@ -9,6 +9,7 @@ export function Upload() {
 const [image, setImage] = useState();
 const [title, setTitle] = useState('');
 const [description, setDescription] = useState('');
+const [url, setUrl] = useState('');
 
 
 
@@ -31,20 +32,12 @@ const getDescription = (event) => {
 const upload = async () => {
   if (image === null) return;
   const imageRef = ref(storage,`images/${image.name + v4()}`);
-  // uploadBytes(imageRef, image).then((data) => {
-  //   alert('Image uploaded');
-  //   getDownloadURL(data.ref).then((url) => {
-  //     console.log('url', url);
-
-  //   })
-
-  // });
-
+ 
   try{
     const response = await uploadBytes(imageRef, image)
-    alert('Image uploaded');
+    console.log('Image uploaded');
     const url = await getDownloadURL(response.ref);
-    console.log('the image url on firebase', url)
+    setUrl(url);
   }catch (err) {
     console.log('Error while uploading image to firebase:', err)
   }
@@ -52,11 +45,19 @@ const upload = async () => {
 
 
 
- // Server side functionality not yet implemented
+ // endpoit /upload on port 3000
+// Object expected on server side
+//  const imgObj = {
+//   userId,
+//   title,
+//   description,
+//   url
+//  }
+
   try {
     await fetch('localhost:3000/upload', {
     method: 'POST',
-    body: JSON.stringify({image: image, title: title, description: description})
+    body: JSON.stringify({image: image, title: title, description: description, url: url, userId: 2})
     })
   } catch (err) {
     console.log(err)
