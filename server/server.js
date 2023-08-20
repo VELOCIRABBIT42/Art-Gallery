@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 
-const galleryRouter = require('./routes/galleryRouter')
+const galleryRouter = require('./routers/galleryRouter');
 
 
 
