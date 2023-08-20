@@ -1,8 +1,11 @@
+// IMPORTS AND REQUIREMENTS ================================
 const db = require('../db');
+import * as bcrypt from 'bcrypt';
 
-// Obj to add middleware methods to
+// OBJ TO ADD MIDDLEWARE METHODS TO =========================
 const authController = {};
 
+// HELPER FUNCTIONS ========================================
 async function createUser(username, password) {
   const insertQuery = 'INSERT INTO users (username, password) VALUES ($1, $2)';
   return await db.query(insertQuery, [username, password]);
@@ -31,6 +34,12 @@ async function checkIfInputMatches(username, password) {
     return false;
   }
 }
+
+async function generateHashedPassword(password) {
+  const salt = bcrypt.genSaltSync(12);
+}
+
+// METHODS ==================================================
 
 authController.signup = async function (req, res, next) {
   // Destructure request body
