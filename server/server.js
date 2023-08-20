@@ -20,6 +20,11 @@ app.use('/gallery', galleryRouter, (req, res)=> {
 });
 
 
+app.use('/upload', galleryRouter, (req, res)=> {
+  res.status(200).json(res.locals.newImage)
+});
+
+
 
 app.use((req,res) => {
   res.status(404).send('Not found.')
