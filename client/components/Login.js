@@ -1,12 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-const navigate = useNavigate()
+const navigate = useNavigate();
+
 
   const getUsername = (event) => {
     setUsername(event.target.value);
@@ -15,14 +16,25 @@ const navigate = useNavigate()
 
   const getPassword = (event) => {
     setPassword(event.target.value);
+    console.log(event.target.value)
   };
 
   const validate = async () => {
+    console.log('Validate', username, password)
     try {
-      const response = await fetch('http://localhost:8080/auth/login', {
+      const response = await fetch('http://localhost:3000/auth/hashedLogin', {
         method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ username: username, password: password }),
       });
+      if (response.status === 200) {
+        navigate('/main');
+      } else {
+        alert('Log in failed');
+      }
     } catch (err) {
       console.log(err);
     }
@@ -62,7 +74,7 @@ const navigate = useNavigate()
           />
           <label for="password">Password</label>
           </div>
-          <button className='btn btn-danger w-100 mb-2'>Login</button>
+          <button onClick={validate} className='btn btn-danger w-100 mb-2'>Login</button>
           <p>Don't have an account? <a href="#" onClick={()=> navigate('/signup')}>Sign up</a></p>
           </div>
         </div>

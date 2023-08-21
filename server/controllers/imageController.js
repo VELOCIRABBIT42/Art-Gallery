@@ -1,4 +1,4 @@
-const db = require('../db') 
+const db = require('../db')
 
 const imageController = {};
 
@@ -21,19 +21,21 @@ imageController.addImage = async (req, res, next) => {
         userId,
         title,
         description,
-        url
+        url,
+        artist
     } = req.body
 
-    console.log(title, description, url);
+    console.log(title, description, url,artist);
 
     try {
-        const query =`INSERT INTO images (user_id, title, url, description)
-        VALUES ($1, $2, $3, $4) RETURNING *`;
+        const query =`INSERT INTO images (user_id, title, url, description,artist)
+        VALUES ($1, $2, $3, $4, $5) RETURNING *`;
         const values = [
             userId,
             title,
             url,
-            description
+            description,
+            artist
         ]
         const results = await db.query(query, values);
         res.locals.newImage = results.rows[0];

@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CardComponent from './CardComponent';
+import { useNavigate } from 'react-router-dom';
 
 const CardContainer = () => {
   const [images, setImages] = useState([]);
+
+  const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    let title;
+
+    let parent = event.target.parentNode.childNodes;
+
+    for (let i = 0; i < parent.length; i++) {
+      const child = parent[i];
+      if (child.className === 'card-title') title = child.innerText;
+    }
+    console.log(title)
+
+    navigate(`/product/${title}`)
+
+  }
 
   useEffect(() => {
     axios
@@ -22,7 +40,7 @@ const CardContainer = () => {
       <div className='container'>
         <div className='row'>
           {images.map((image) => (
-            <CardComponent key={image.id} image={image} />
+            <CardComponent key={image.id} image={image} click={handleClick} />
           ))}
         </div>
       </div>
