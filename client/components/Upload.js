@@ -9,6 +9,7 @@ export function Upload() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
+  const [artist, setArtist] = useState('');
 
   const getImg = (event) => {
     setImage(event.target.files[0]);
@@ -22,6 +23,11 @@ export function Upload() {
 
   const getDescription = (event) => {
     setDescription(event.target.value);
+    console.log(event.target.value);
+  };
+
+  const getArtist = (event) => {
+    setArtist(event.target.value);
     console.log(event.target.value);
   };
 
@@ -49,6 +55,7 @@ export function Upload() {
             image: image,
             title: title,
             description: description,
+            artist: artist,
             url: firebaseUrl,
             userId: 2,
           }),
@@ -112,8 +119,14 @@ export function Upload() {
             <input
               className="form-control mb-3"
               type='text'
-              onChange={getDescription}
+              onChange={getArtist}
               placeholder='Artist'
+            />
+            <input
+              className="form-control mb-3"
+              type='text'
+              onChange={getDescription}
+              placeholder='Description'
             />
             <div className='form-check mb-3'>
             <label className="form-check-label" for='original'>Original work?</label>
