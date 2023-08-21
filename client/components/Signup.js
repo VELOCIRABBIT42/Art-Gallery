@@ -40,8 +40,8 @@ const navigate = useNavigate()
         <div className='row border border-2 rounded-3 shadow'>
           <div className='col'>
             <img
-              src='https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947_1280.jpg'
-              style={{ width: 400 }}
+              src='https://media.istockphoto.com/id/916731506/vector/cover-your-eyes-with-both-hands.jpg?s=612x612&w=0&k=20&c=C6EANocmn8thIaLGEfvcy3gGsdgqkUlLcELGloEC1GQ='
+              style={{ width: 600 }}
               className='img-fluid border rounded-3 m-2'
             />
           </div>

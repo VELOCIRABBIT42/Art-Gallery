@@ -7,7 +7,8 @@ const ProductComponent = () => {
   const [images, setImages] = useState({});
 
   const location = useLocation();
-  let title = location.pathname.slice(9).replace('%20', ' ');
+  let title = location.pathname.slice(9).replaceAll('%20', ' ');
+  console.log(title);
 
   useEffect(() => {
     axios

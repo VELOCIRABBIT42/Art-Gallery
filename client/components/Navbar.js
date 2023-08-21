@@ -16,7 +16,7 @@ export default function Navbar() {
           <a onClick={()=> navigate('/main')} className="nav-link" href="#">Home</a>
         </li>
         <li className="navbar-item">
-        <a className="nav-link" href="#">About</a>
+        <a onClick={()=> navigate('/main')} className="nav-link" href="#">About</a>
         </li>
         <li className="navbar-item">
         <a className="nav-link" href="#">Profile</a>

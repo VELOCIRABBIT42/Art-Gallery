@@ -63,6 +63,14 @@ export function Upload() {
       } catch (err) {
         console.log(err);
       }
+      let inputs = document.querySelectorAll('input')
+      console.log('node list',inputs);
+      console.log('first field',inputs[1])
+      inputs[1].value = ''
+      inputs[2].value = ''
+      inputs[3].value = ''
+
+
     } catch (err) {
       console.log('Error while uploading image to firebase:', err);
     }

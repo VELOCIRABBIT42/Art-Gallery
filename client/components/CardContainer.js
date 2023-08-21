@@ -38,7 +38,7 @@ const CardContainer = () => {
   return (
     <>
       <div className='container'>
-        <div className='row'>
+        <div className='row gy-3'>
           {images.map((image) => (
             <CardComponent key={image.id} image={image} click={handleClick} />
           ))}
