@@ -1,6 +1,6 @@
 // IMPORTS AND REQUIREMENTS ================================
 const db = require('../db');
-import * as bcrypt from 'bcrypt';
+// import * as bcrypt from 'bcrypt';
 
 // OBJ TO ADD MIDDLEWARE METHODS TO =========================
 const authController = {};

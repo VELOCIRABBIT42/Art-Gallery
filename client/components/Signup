@@ -1,12 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-export function Login() {
+export function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-const navigate = useNavigate()
 
   const getUsername = (event) => {
     setUsername(event.target.value);
@@ -19,7 +16,7 @@ const navigate = useNavigate()
 
   const validate = async () => {
     try {
-      const response = await fetch('http://localhost:8080/auth/login', {
+      const response = await fetch('http://localhost:8080/auth/signup', {
         method: 'post',
         body: JSON.stringify({ username: username, password: password }),
       });
@@ -41,7 +38,7 @@ const navigate = useNavigate()
           </div>
           <div className="col p-3 align-items-center">
           <h3 className="mb-3">The Art Gallery</h3>
-          <h6>Sign into your account</h6>
+          <h6>Sign up</h6>
           <div className='form-floating'>
           <input
             className='form-control mb-2'
@@ -63,7 +60,7 @@ const navigate = useNavigate()
           <label for="password">Password</label>
           </div>
           <button className='btn btn-danger w-100 mb-2'>Login</button>
-          <p>Don't have an account? <a href="#" onClick={()=> navigate('/signup')}>Sign up</a></p>
+          <p>Already have an account? <a href="#">Log in</a></p>
           </div>
         </div>
       </div>
