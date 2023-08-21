@@ -9,7 +9,7 @@ const CardComponent = ({ image, click }) => {
     //     <p className="card-text">{image.description}</p>
     //   </div>
     // </div>
-        <div className='col-3'>
+        <div className='col-3 hoverCard'>
           <div className='card h-100 shadow'>
             <div className='d-flex flex-column justify-content align-items-center'>
               <img

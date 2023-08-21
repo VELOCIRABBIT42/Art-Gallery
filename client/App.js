@@ -8,7 +8,6 @@ import CardComponent from './components/CardComponent';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Product from './components/ProductComponent';
-
 // import { Signup } from './components/Signup';
 
 const App = () => {

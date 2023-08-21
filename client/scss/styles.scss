@@ -28,3 +28,11 @@
   background-size: cover;
   background-image: url('https://images.squarespace-cdn.com/content/v1/5511fc7ce4b0a3782aa9418b/1429678746102-MK2TDDM4ED8DY2Z7J3JP/abstract-patterns.jpg');
 }
+
+.hoverCard {
+  transition: 0.3s;
+}
+
+.hoverCard:hover {
+  transform: scale(1.15);
+}
