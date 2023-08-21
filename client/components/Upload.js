@@ -25,15 +25,37 @@ export function Upload() {
     console.log(event.target.value);
   };
 
-  const upload = async () => {
+  const upload = async (event) => {
+    event.preventDefault()
+    console.log('upload function called')
     if (image === null) return;
     const imageRef = ref(storage, `images/${image.name + v4()}`);
 
     try {
       const response = await uploadBytes(imageRef, image);
       console.log('Image uploaded');
-      const url = await getDownloadURL(response.ref);
-      setUrl(url);
+      const firebaseUrl = await getDownloadURL(response.ref);
+      console.log(firebaseUrl)
+      // setUrl(firebaseUrl);
+      try {
+        console.log(image, title, description)
+        await fetch('http://localhost:3000/upload', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            image: image,
+            title: title,
+            description: description,
+            url: firebaseUrl,
+            userId: 2,
+          }),
+        });
+      } catch (err) {
+        console.log(err);
+      }
     } catch (err) {
       console.log('Error while uploading image to firebase:', err);
     }
@@ -46,21 +68,24 @@ export function Upload() {
     //   description,
     //   url
     //  }
-
-    try {
-      await fetch('localhost:3000/upload', {
-        method: 'POST',
-        body: JSON.stringify({
-          image: image,
-          title: title,
-          description: description,
-          url: url,
-          userId: 2,
-        }),
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    // if (!url.length) {
+    //   console.log('empty url', url)
+    //   return;
+    // }
+    // try {
+    //   await fetch('http://localhost:3000/upload', {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       image: image,
+    //       title: title,
+    //       description: description,
+    //       url: url,
+    //       userId: 2,
+    //     }),
+    //   });
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (

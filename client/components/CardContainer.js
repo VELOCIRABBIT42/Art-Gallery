@@ -7,9 +7,10 @@ const CardContainer = () => {
 
   useEffect(() => {
     axios
-      .get('/api/images') // Replace with the API endpoint pertaining to PostgreSQL
+      .get('http://localhost:3000/gallery') // Replace with the API endpoint pertaining to PostgreSQL
       .then((response) => {
         setImages(response.data);
+        console.log('Response:', response.data);
       })
       .catch((error) => {
         console.error('Error fetching images:', error);
@@ -18,7 +19,6 @@ const CardContainer = () => {
 
   return (
     <>
-      <h1>card container</h1>
       <div className='container'>
         <div className='row'>
           {images.map((image) => (
