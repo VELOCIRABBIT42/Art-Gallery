@@ -6,7 +6,7 @@ export function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const getUsername = (event) => {
     setUsername(event.target.value);

@@ -1,4 +1,5 @@
 const express = require('express');
+//rename Router
 const router = express.Router();
 const authController = require('../controllers/authController');
 const cookieParser = require('cookie-parser');

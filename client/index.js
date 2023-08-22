@@ -6,10 +6,6 @@ import App from './App';
 import * as bootstrap from 'bootstrap'
 import './scss/styles.scss';
 
-
-
-
-
 const root = createRoot(document.getElementById('root'))
 
 root.render(
