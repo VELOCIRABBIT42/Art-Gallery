@@ -3,27 +3,34 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: process.env.NODE_ENV,
+
   devServer: {
     static: {
       directory: path.join(__dirname, "build"),
       publicPath: "build",
     },
+    proxy : {
+      '/art': 'http://localhost:3000'
+    },
     compress: true,
     port: 8080,
     historyApiFallback: true,
   },
+  
   entry: "./client/index.js",
   output: {
     path: path.join(__dirname, "build"),
     filename: "bundle.js",
     publicPath: "/",
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       title: "development",
       template: "index.html",
     }),
   ],
+  
   module: {
     rules: [
       {

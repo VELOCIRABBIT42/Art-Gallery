@@ -19,8 +19,7 @@ const CardContainer = () => {
     }
     console.log(title)
 
-    navigate(`/product/${title}`)
-
+    navigate(`/product/${title}`);
   }
 
   useEffect(() => {
