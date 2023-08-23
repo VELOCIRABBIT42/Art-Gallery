@@ -12,9 +12,9 @@ authRouter.post('/signup', authController.signup, (req, res) => {
 });
 
 // POST REQUEST TO LOG IN, DATABASE MIDDLEWARE
-authRouter.post('/login', authController.login, (req, res) => {
-  res.status(200).json(res.locals.loginAttempt);
-});
+// authRouter.post('/login', authController.login, (req, res) => {
+//   res.status(200).json(res.locals.loginAttempt);
+// });
 
 // POST REQUEST TO HASHED LOGIN
 authRouter.post('/hashedLogin', authController.hashedLogin, (req, res) => {
