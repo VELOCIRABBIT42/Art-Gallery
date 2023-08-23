@@ -12,7 +12,7 @@ const CardComponent = ({ image, click }) => {
           <div className='card-body'>
             <h5 className='card-title'>{image.title}</h5>
             <p className='card-text'>Artist: {image.artist}</p>
-            <button onClick={click} className='btn btn-sm btn-outline-danger'>Learn more</button>
+            <button onClick={()=>{click(image.title)}} className='btn btn-sm btn-outline-danger'>Learn more</button>
           </div>
         </div>
       </div>

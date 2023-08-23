@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function Sidebar() {
+const Sidebar= ()=> {
   const navigate = useNavigate();
 
   return (
@@ -17,3 +17,4 @@ export default function Sidebar() {
     </div>
   );
 };
+export default Sidebar; 

@@ -1,106 +1,54 @@
 import React from 'react';
 import { useState } from 'react';
-import { storage } from '../firebase';
+import storage from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 
-export function Upload() {
+const Upload = ( props )=>{
   const [image, setImage] = useState();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [url, setUrl] = useState('');
   const [artist, setArtist] = useState('');
 
   const getImg = (event) => {
     setImage(event.target.files[0]);
-    console.log('local image', event.target.files[0]);
   };
 
   const getTitle = (event) => {
     setTitle(event.target.value);
-    console.log(event.target.value);
   };
 
   const getDescription = (event) => {
     setDescription(event.target.value);
-    console.log(event.target.value);
   };
 
   const getArtist = (event) => {
     setArtist(event.target.value);
-    console.log(event.target.value);
   };
 
   const upload = async (event) => {
-    event.preventDefault()
-    console.log('upload function called')
+    event.preventDefault();
     if (image === null) return;
-    const imageRef = ref(storage, `images/${image.name + v4()}`);
 
+    const imageRef = ref(storage, `images/${image.name + v4()}`);
     try {
       const response = await uploadBytes(imageRef, image);
-      console.log('Image uploaded');
-      const firebaseUrl = await getDownloadURL(response.ref);
-      console.log(firebaseUrl)
-      // setUrl(firebaseUrl);
-      try {
-        console.log(image, title, description)
-        await fetch('http://localhost:3000/upload', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            image: image,
-            title: title,
-            description: description,
-            artist: artist,
-            url: firebaseUrl,
-            userId: 2,
-          }),
-        });
-      } catch (err) {
-        console.log(err);
-      }
-      let inputs = document.querySelectorAll('input')
-      console.log('node list',inputs);
-      console.log('first field',inputs[1])
-      inputs[1].value = ''
-      inputs[2].value = ''
-      inputs[3].value = ''
+      const url = await getDownloadURL(response.ref);
+      
+      await fetch('/upload', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image, title, description, artist, url, userId: 2 }),
+      });
 
-
-    } catch (err) {
-      console.log('Error while uploading image to firebase:', err);
+      const inputs = document.querySelectorAll('input');
+      inputs[1].value = '';
+      inputs[2].value = '';
+      inputs[3].value = '';
     }
-
-    // endpoit /upload on port 3000
-    // Object expected on server side
-    //  const imgObj = {
-    //   userId,
-    //   title,
-    //   description,
-    //   url
-    //  }
-    // if (!url.length) {
-    //   console.log('empty url', url)
-    //   return;
-    // }
-    // try {
-    //   await fetch('http://localhost:3000/upload', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       image: image,
-    //       title: title,
-    //       description: description,
-    //       url: url,
-    //       userId: 2,
-    //     }),
-    //   });
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -146,4 +94,6 @@ export function Upload() {
       </div>
     </div>
   );
-}
+};
+
+export default Upload;
