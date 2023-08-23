@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserDetailsForm from '../login/UserDetailsForm'
 
-const Signup = ( props ) => {
+const Signup = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -23,10 +23,9 @@ const Signup = ( props ) => {
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
-      
+
       //Login on signup was never implemented but needs to be implemented
-    } 
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   };
@@ -42,5 +41,5 @@ const Signup = ( props ) => {
           </p>
       </UserDetailsForm>
   );
-}
+};
 export default Signup;

@@ -23,5 +23,4 @@ const Navbar = ({header, links}) => {
       </div>
     </nav>
   );
-};
-export default Navbar; 
+export default Navbar;

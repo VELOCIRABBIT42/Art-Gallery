@@ -18,8 +18,7 @@ const Login = (props)=>{
       else {
         alert('Log in failed');
       }
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   };
@@ -33,6 +32,7 @@ const Login = (props)=>{
         <p>Don't have an account? <a href="#" onClick={()=> navigate('/signup')}>Sign up</a></p>
       </UserDetailsForm>
   );
+};
 };
 
 export default Login;
