@@ -1,13 +1,13 @@
 import React from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import CardContainer from './components/CardContainer';
-import { Upload } from './components/Upload';
-import { Login } from './components/Login';
-import { Signup }  from './components/Signup';
-import CardComponent from './components/CardComponent';
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
-import Product from './components/ProductComponent';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import CardContainer from './main/home/CardContainer';
+import Upload from './main/create/Upload';
+import Login from './main/login/Login';
+import Signup  from './main/signup/Signup';
+import CardComponent from './main/home/CardComponent';
+import Navbar from './utility/Navbar';
+import Sidebar from './utility/Sidebar';
+import Product from './main/viewProduct/ProductComponent';
 
 const App = () => {
   const location = useLocation()
