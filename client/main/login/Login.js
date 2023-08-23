@@ -33,6 +33,5 @@ const Login = (props)=>{
       </UserDetailsForm>
   );
 };
-};
 
 export default Login;
