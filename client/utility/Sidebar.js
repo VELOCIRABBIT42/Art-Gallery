@@ -1,20 +1,20 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
 
-const Sidebar= ()=> {
-  const navigate = useNavigate();
+//elementData = [[str name, func action]]
+//title = str
+const Sidebar = ({title, elementData}) => {
+  const items = [];
+  for (const element of elementData){
+    items.push(
+      <p key={element[0]} onClick={element[1]} className="list-group-item list-group-item-action list-group-item-light border-bottom border-3 ">{element[0]}</p>
+    );
+  }
 
   return (
     <div className="list-group list-group-flush border-end border-3 ">
-      <h3 className="list-group-item list-group-item-action list-group-item-light p-3">Filter</h3>
-      <p onClick={()=> navigate('/upload')} className="list-group-item list-group-item-action list-group-item-light border-bottom border-3 ">Create</p>
-      <p className="list-group-item list-group-item-action list-group-item-light border-bottom border-3 ">Sculptures</p>
-      <p className="list-group-item list-group-item-action list-group-item-light border-bottom border-3">Paintings</p>
-      <p className="list-group-item list-group-item-action list-group-item-light border-bottom border-3">Virtual</p>
-      <p className="list-group-item list-group-item-action list-group-item-light border-bottom border-3">Modern</p>
-      <p className="list-group-item list-group-item-action list-group-item-light border-bottom border-3 ">Lanscapes</p>
-      <p className="list-group-item list-group-item-action list-group-item-light border-bottom border-3">Events</p>
+      <h3 className="list-group-item list-group-item-action list-group-item-light p-3">{title}</h3>
+      {items}
     </div>
   );
 };
-export default Sidebar; 
+export default Sidebar;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const ProductComponent = () => {
@@ -11,7 +10,7 @@ const ProductComponent = () => {
 
   useEffect( async () => {
     try {
-      const response = await axios.get('http://localhost:3000/gallery') // Replace with the API endpoint pertaining to PostgreSQL
+      const response = await fetch('/gallery') // Replace with the API endpoint pertaining to PostgreSQL
       setImages( response.data.filter((obj) => obj.title === title )[0] );
     }
     catch (e){

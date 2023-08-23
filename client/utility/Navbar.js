@@ -1,32 +1,27 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import NavbarItem from './NavbarItem';
 
-const Navbar = () => {
-  const navigate = useNavigate();
+//header is a string
+//links = [[str label, str destination]]
 
+const Navbar = ({header, links}) => {
+  //Itterate and create elements
+  const items = [];
+  for (const link of links){
+    items.push(
+      <NavbarItem key={link[0]} label={link[0]} destination={link[1]}/>
+    );
+  }
 
   return (
-    <>
-      <nav className="navbar navbar-expand bg-danger mb-3" >
-        <div className="container">
-          <h1 className="navbar-brand">The Art Gallery</h1>
-          <ul className="navbar-nav">
-            <li className="navbar-item">
-              <a onClick={() => navigate('/main')} className="nav-link" href="#">Home</a>
-            </li>
-            <li className="navbar-item">
-              <a onClick={() => navigate('/main')} className="nav-link" href="#">About</a>
-            </li>
-            <li className="navbar-item">
-              <a className="nav-link" href="#">Profile</a>
-            </li>
-            <li className="navbar-item">
-              <a className="nav-link" href="#">More</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </>
+    <nav className="navbar navbar-expand bg-danger mb-3" >
+      <div className="container">
+        <h1 className="navbar-brand">{header}</h1>
+        <ul className="navbar-nav">
+          { items }
+        </ul>
+      </div>
+    </nav>
   );
 };
 export default Navbar; 
