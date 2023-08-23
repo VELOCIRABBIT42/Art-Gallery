@@ -20,9 +20,17 @@ authRouter.post('/signup', authController.signup, (req, res) => {
 authRouter.post('/hashedLogin', authController.hashedLogin, (req, res) => {
   //if conditional
   //if res.locals.success = true send 200
-  //else send 400
-  res.status(200).json(res.locals);
+  if (res.locals.loginAttempt) {
+    res.status(200).json('Successful Login');
+  } else {
+    res.status(400).json('Login Error');
+  }
 });
+
+/*try{
+  co
+}
+*/
 
 // // POST REQUEST TO REFRESH
 authRouter.post('/refresh', authController.refresh, (req, res) => {
