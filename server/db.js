@@ -10,7 +10,6 @@ const PG_URI = `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}
 
 
 
-
 const pool = new Pool({
   connectionString: PG_URI
 });
