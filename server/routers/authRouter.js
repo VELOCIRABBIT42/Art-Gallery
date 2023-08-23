@@ -1,13 +1,13 @@
 const express = require('express');
 //rename Router
-const router = express.Router();
+const authRouter = express.Router();
 const authController = require('../controllers/authController');
 const cookieParser = require('cookie-parser');
 
-router.use(cookieParser());
+authRouter.use(cookieParser());
 
 // POST REQUEST TO SIGN-UP, DATABASE MIDDLEWARE
-router.post('/signup',
+authRouter.post('/signup',
   (req, res, next) => {
     console.log('routed to /signup');
     return next();
@@ -17,7 +17,7 @@ router.post('/signup',
 });
 
 // POST REQUEST TO LOG IN, DATABASE MIDDLEWARE
-router.post('/login',
+authRouter.post('/login',
   (req, res, next) => {
     console.log('routed to /login');
     return next();
@@ -27,7 +27,7 @@ router.post('/login',
 });
 
 // POST REQUEST TO HASHED LOGIN
-router.post('/hashedLogin',
+authRouter.post('/hashedLogin',
   (req, res, next) => {
     console.log('routed to /hashedLogin');
     return next();
@@ -37,7 +37,7 @@ router.post('/hashedLogin',
 });
 
 // // POST REQUEST TO REFRESH
-router.post('/refresh',
+authRouter.post('/refresh',
   (req, res, next) => {
     console.log('routed to /refresh');
     return next();
@@ -48,7 +48,7 @@ router.post('/refresh',
 
 
 // // POST REQUEST TO LOGOUT
-router.post('/logout',
+authRouter.post('/logout',
   (req, res, next) => {
     console.log('routed to /logout');
     return next();
@@ -58,4 +58,4 @@ router.post('/logout',
 });
 
 
-module.exports = router;
+module.exports = authRouter;
