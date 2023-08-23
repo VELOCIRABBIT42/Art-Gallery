@@ -13,15 +13,8 @@ app.use('/art/auth', authRouter);
 
 app.use('/art/gallery', galleryRouter);
 
-// app.use('/art/upload', galleryRouter, (req, res)=> {
-//   res.status(200).json(res.locals.newImage)
-// });
-
-// catch-all route handler for any requests to an unknown route
-// app.use('/', express.static(path.join(__dirname, '../client')));
-
-app.use('*', (req,res) => {
-  res.status(404).send('Not found.')
+app.use('*', (req, res) => {
+  res.status(404).send('Not found.');
 });
 
 // Error handler
@@ -37,8 +30,8 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-})
+  console.log(`Server is listening on port ${PORT}`);
+});
 
 module.exports = app;
 

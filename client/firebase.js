@@ -11,9 +11,10 @@ const firebaseConfig = {
   projectId: "gifted-harmony-506",
   storageBucket: "gifted-harmony-506.appspot.com",
   messagingSenderId: "586386303450",
-  appId: "1:586386303450:web:8cfbd170fdbbd00ee938e3"
+  appId: "1:586386303450:web:8cfbd170fdbbd00ee938e3",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const storage = getStorage(app);
+const storage = getStorage(app)
+export default storage;
