@@ -8,6 +8,7 @@ imageController.getImages = async (req, res, next) => {
     const results = await db.query(query);
     console.log('after await');
     res.locals.images = results.rows;
+
     return next();
   } catch (err) {
     return next({
