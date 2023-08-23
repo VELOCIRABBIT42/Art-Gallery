@@ -13,10 +13,9 @@ const CardContainer = () => {
 
   useEffect(async () => {
     try {
-      const response = await axios.get('/gallery') // Replace with the API endpoint pertaining to PostgreSQL
+      const response = await axios.get('/gallery'); // Replace with the API endpoint pertaining to PostgreSQL
       setImages(response.data);
-    }
-    catch (e) {
+    } catch (e) {
       console.error('Error fetching images:', error);
     }
   }, []);

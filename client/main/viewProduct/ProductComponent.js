@@ -9,12 +9,11 @@ const ProductComponent = () => {
   const location = useLocation();
   let title = location.pathname.slice(9).replaceAll('%20', ' ');
 
-  useEffect( async () => {
+  useEffect(async () => {
     try {
-      const response = await axios.get('http://localhost:3000/gallery') // Replace with the API endpoint pertaining to PostgreSQL
-      setImages( response.data.filter((obj) => obj.title === title )[0] );
-    }
-    catch (e){
+      const response = await axios.get('http://localhost:3000/gallery'); // Replace with the API endpoint pertaining to PostgreSQL
+      setImages(response.data.filter((obj) => obj.title === title)[0]);
+    } catch (e) {
       console.error('Error fetching images:', error);
     }
   }, []);
@@ -29,14 +28,15 @@ const ProductComponent = () => {
             </div>
             <div className='col'>
               <h1>{images.title}</h1>
-              <p className="artist">Artist: {images.artist}</p>
-              <p className="description">{images.description}</p>
+              <p className='artist'>Artist: {images.artist}</p>
+              <p className='description'>{images.description}</p>
               <button className='btn btn-sm btn-outline-danger'>Contact</button>
             </div>
           </div>
         </div>
-      )
-      : ( '' ) }
+      ) : (
+        ''
+      )}
     </>
   );
 };

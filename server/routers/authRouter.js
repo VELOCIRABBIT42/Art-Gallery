@@ -1,61 +1,37 @@
 const express = require('express');
 //rename Router
-const router = express.Router();
+const authRouter = express.Router();
 const authController = require('../controllers/authController');
 const cookieParser = require('cookie-parser');
 
-router.use(cookieParser());
+authRouter.use(cookieParser());
 
 // POST REQUEST TO SIGN-UP, DATABASE MIDDLEWARE
-router.post('/signup',
-  (req, res, next) => {
-    console.log('routed to /signup');
-    return next();
-  },
-  authController.signup, (req, res) =>{
+authRouter.post('/signup', authController.signup, (req, res) => {
   res.sendStatus(200);
 });
 
 // POST REQUEST TO LOG IN, DATABASE MIDDLEWARE
-router.post('/login',
-  (req, res, next) => {
-    console.log('routed to /login');
-    return next();
-  },
-  authController.login, (req, res) => {
+authRouter.post('/login', authController.login, (req, res) => {
   res.status(200).json(res.locals.loginAttempt);
 });
 
 // POST REQUEST TO HASHED LOGIN
-router.post('/hashedLogin',
-  (req, res, next) => {
-    console.log('routed to /hashedLogin');
-    return next();
-  },
-  authController.hashedLogin, (req, res) => {
+authRouter.post('/hashedLogin', authController.hashedLogin, (req, res) => {
+  //if conditional
+  //if res.locals.success = true send 200
+  //else send 400
   res.status(200).json(res.locals);
 });
 
 // // POST REQUEST TO REFRESH
-router.post('/refresh',
-  (req, res, next) => {
-    console.log('routed to /refresh');
-    return next();
-  },
-  authController.refresh, (req, res) => {
+authRouter.post('/refresh', authController.refresh, (req, res) => {
   res.status(200).json(res.locals);
 });
-
 
 // // POST REQUEST TO LOGOUT
-router.post('/logout',
-  (req, res, next) => {
-    console.log('routed to /logout');
-    return next();
-  },
-  authController.logout, (req, res) => {
+authRouter.post('/logout', authController.logout, (req, res) => {
   res.status(200).json(res.locals);
 });
 
-
-module.exports = router;
+module.exports = authRouter;

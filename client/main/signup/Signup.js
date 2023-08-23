@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = ( props ) => {
+const Signup = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -19,13 +19,15 @@ const Signup = ( props ) => {
     try {
       const response = await fetch('http://localhost:3000/auth/signup', {
         method: 'post',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ username, password }),
       });
-      
+
       //Login on signup was never implemented but needs to be implemented
-    } 
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   };
@@ -63,13 +65,18 @@ const Signup = ( props ) => {
             />
             <label htmlFor='password'>Password</label>
           </div>
-          <button onClick={signup} className='btn btn-primary w-100 mb-2'>Sign up</button>
+          <button onClick={signup} className='btn btn-primary w-100 mb-2'>
+            Sign up
+          </button>
           <p>
-            Already have an account? <a href='#' onClick={()=> navigate('/')} >Log in</a>
+            Already have an account?{' '}
+            <a href='#' onClick={() => navigate('/')}>
+              Log in
+            </a>
           </p>
         </div>
       </div>
     </div>
   );
-}
+};
 export default Signup;
