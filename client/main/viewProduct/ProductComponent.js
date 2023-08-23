@@ -8,22 +8,15 @@ const ProductComponent = () => {
 
   const location = useLocation();
   let title = location.pathname.slice(9).replaceAll('%20', ' ');
-  console.log(title);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:3000/gallery') // Replace with the API endpoint pertaining to PostgreSQL
-      .then((response) => {
-        setImages(
-          response.data.filter((obj) => {
-            return obj.title === title;
-          })[0]
-        );
-        console.log('Response:', response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching images:', error);
-      });
+  useEffect( async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/gallery') // Replace with the API endpoint pertaining to PostgreSQL
+      setImages( response.data.filter((obj) => obj.title === title )[0] );
+    }
+    catch (e){
+      console.error('Error fetching images:', error);
+    }
   }, []);
 
   return (
@@ -35,16 +28,15 @@ const ProductComponent = () => {
               <img src={images.url} className='img-fluid' />
             </div>
             <div className='col'>
-            <h1>{images.title}</h1>
-            <p className="artist">Artist: {images.artist}</p>
-            <p className="description">{images.description}</p>
-            <button className='btn btn-sm btn-outline-danger'>Contact</button>
+              <h1>{images.title}</h1>
+              <p className="artist">Artist: {images.artist}</p>
+              <p className="description">{images.description}</p>
+              <button className='btn btn-sm btn-outline-danger'>Contact</button>
             </div>
           </div>
         </div>
-      ) : (
-        ''
-      )}
+      )
+      : ( '' ) }
     </>
   );
 };
