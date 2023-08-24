@@ -17,6 +17,7 @@ authController.hashedLogin = async function (req, res, next) {
       `SELECT * FROM users WHERE username = '${username}'`,
     );
     const id = user.rows[0].user_id;
+    res.locals.id = id;
 
     if (user.rows.length > 0) {
       const match = await bcrypt.compare(password, user.rows[0].password);
@@ -65,60 +66,3 @@ authController.hashedLogin = async function (req, res, next) {
 };
 
 module.exports = authController.hashedLogin;
-
-// authController.hashedLogin = async function (req, res, next) {
-//   const { username, password } = req.body;
-//   try {
-//     const user = await db.query(
-//       `SELECT * FROM users WHERE username = '${username}'`,
-//     );
-//     const id = user.rows[0].user_id;
-
-//     if (user.rows.length > 0) {
-//       const match = await bcrypt.compare(password, user.rows[0].password);
-
-//       if (match) {
-//         res.locals.loginAttempt = match;
-//         // JWT
-//         const payload = {
-//           user_id: id,
-//           username: username,
-//         };
-
-//         const accessToken = jwt.sign(payload, accessTokenSecret, {
-//           expiresIn: '180s',
-//         });
-
-//         const refreshToken = jwt.sign(payload, refreshTokenSecret, {
-//           expiresIn: '300s',
-//         });
-
-//         res.cookie('jwt', refreshToken, {
-//           httpOnly: true, // Only accessible by a web server
-//           secure: true, //https
-//           sameSite: 'None',
-//           maxAge: 5 * 60 * 1000,
-//         });
-
-//         res.locals.accessToken = accessToken;
-//         return next();
-//       } else {
-//         console.log('Invalid password');
-//         res.locals.loginAttempt = match;
-//       }
-//       return next();
-//     } else {
-//       console.log('User not found');
-//       res.locals.loginAttempt = false;
-//       return next();
-//     }
-//   } catch (err) {
-//     return next({
-//       log: `authController.hashedLogin ERROR: ${err}`,
-//       status: 400,
-//       message: {
-//         err: 'Error with username or password',
-//       },
-//     });
-//   }
-// };
