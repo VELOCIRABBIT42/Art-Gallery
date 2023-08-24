@@ -1,12 +1,12 @@
 const signup = require('./authMiddleware/signup');
-const hashedLogin = require('./authMiddleware/hashedLogin');
+const login = require('./authMiddleware/login');
 const setCookie = require('./authMiddleware/setCookie');
 const refresh = require('./authMiddleware/refresh');
 const logout = require('./authMiddleware/logout');
 
 const authController = {
   signup,
-  hashedLogin,
+  login,
   setCookie,
   refresh,
   logout,
