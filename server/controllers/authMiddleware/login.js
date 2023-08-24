@@ -23,7 +23,7 @@ authController.login = async function (req, res, next, db = dbBase) {
 
     if (user.rows.length > 0) {
       const match = await bcrypt.compare(password, user.rows[0].password);
-      res.locals.loginAttempt = true;
+      res.locals.loginAttempt = match;
     } else {
       res.locals.loginAttempt = false;
       return next();
