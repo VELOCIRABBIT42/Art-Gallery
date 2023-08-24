@@ -27,20 +27,12 @@ const Create = (props) => {
     <div className='d-flex flex-column'>
       <Navbar
         header='Create'
-<<<<<<< HEAD
         links= {[
          ['Home', '/home'],
          ['About', '/about'],
          ['Profile', '/profile'],
          ['More', '/more'],
          ['Sign Out', '/'],
-=======
-        links={[
-          ['Home', '/home'],
-          ['About', '/about'],
-          ['Profile', '/profile'],
-          ['More', '/more'],
->>>>>>> dev
         ]}
       />
       <div className='container d-flex align-items-center justify-content-center mt-5 h-100'>
@@ -49,7 +41,6 @@ const Create = (props) => {
         </div>
         <div className='col'>
           <h3>Submit your work</h3>
-<<<<<<< HEAD
           <InputField setterFunction={setImage} type={'file'}/>
           <InputField setterFunction={setTitle} placeholder='Title of work'/>
           <InputField setterFunction={setArtist} placeholder='Artist'/>
@@ -58,35 +49,6 @@ const Create = (props) => {
             <TypeDropdown setterFunction={ setType } value={type} options={['Sculptures', 'Paintings', 'Virtual', 'Modern', 'Lanscapes']}/>
             <button className="btn btn-danger w-100 ms-2" onClick={upload}>Submit</button>
           </div>
-=======
-          <InputField setterFunction={setImage} type={'file'} />
-          <InputField setterFunction={setTitle} placeholder='Title of work' />
-          <InputField setterFunction={setArtist} placeholder='Artist' />
-          <InputField
-            setterFunction={setDescription}
-            placeholder='Description'
-          />
-          <TypeDropdown
-            setterFunction={setType}
-            value={type}
-            options={[
-              'Sculptures',
-              'Paintings',
-              'Virtual',
-              'Modern',
-              'Landscapes',
-            ]}
-          />
-          <div className='form-check mb-3'>
-            <label className='form-check-label' for='original'>
-              Original work?
-            </label>
-            <input type='checkbox' className='form-check-input' />
-          </div>
-          <button className='btn btn-danger w-100' onClick={upload}>
-            Submit
-          </button>
->>>>>>> dev
         </div>
       </div>
     </div>
