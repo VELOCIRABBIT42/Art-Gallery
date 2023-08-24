@@ -22,7 +22,7 @@ const uploadFile = async ({
     await fetch('/art/gallery/addimage', {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image, title, description, artist, url, type }),
+      body: JSON.stringify({ title, description, artist, url, filter: type }),
     });
   }
   catch (err) {

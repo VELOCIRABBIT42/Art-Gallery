@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../utility/Navbar';
 import Sidebar from '../../utility/Sidebar';
 import cachedDatabase from '../../utility/cachedDatabase';
-import { filterImagesByCategory } from './filterImages';
+import { filterByCategory } from './filterImages';
 
 const Home = (props) => {
   const [images, setImages] = useState([]);
@@ -18,6 +18,12 @@ const Home = (props) => {
     cachedDatabase.callbackFunctions.push(setImages);
     cachedDatabase.loadServerValues();
   }, []);
+
+  const filterImagesByCategory = (category) => {
+    const filtered = filterByCategory(category, cachedDatabase.serverDataObject);
+    //set state with filtered images 
+    setImages(filtered);
+};
 
   return (
     <div className='d-flex flex-column'>
@@ -38,7 +44,7 @@ const Home = (props) => {
             ['Paintings', ()=> filterImagesByCategory('Paintings')],
             ['Virtual', ()=> filterImagesByCategory('Virtual')],
             ['Modern', ()=> filterImagesByCategory('Modern')],
-            ['Lanscapes', ()=> filterImagesByCategory('Landscapes')],
+            ['Landscapes', ()=> filterImagesByCategory('Landscapes')],
           ]}
         />
         <div className='container'>

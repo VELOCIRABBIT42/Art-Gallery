@@ -2,8 +2,10 @@ const cachedDatabase = {
   //Function to load values
   loadServerValues: async function() {
     try {
-      let response = await fetch('/art/gallery') // Replace with the API endpoint pertaining to PostgreSQL
+      let response = await fetch('/art/gallery');
+      // console.log(response);
       response = await response.json();
+
       if (!Array.isArray(response)) return;
   
       this.serverDataObject = response;
