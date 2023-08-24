@@ -12,6 +12,7 @@ const More = () => {
              ['Create', '/create'],
              ['Profile', '/profile'],
              ['About', '/about'],
+             ['Sign Out', '/'],
             ]}
           />
         </div>

@@ -14,8 +14,9 @@ const Create = (props) => {
 
   const upload = async (event) => {
     if (type === 'Select Type') return;
-    uploadFile({ image, title, description, artist, type });
-
+    await uploadFile({ image, title, description, artist, type });
+    
+    setImage();
     setTitle('');
     setDescription('');
     setArtist('');
@@ -26,11 +27,12 @@ const Create = (props) => {
     <div className='d-flex flex-column'>
       <Navbar
         header='Create'
-        links={[
-          ['Home', '/home'],
-          ['About', '/about'],
-          ['Profile', '/profile'],
-          ['More', '/more'],
+        links= {[
+         ['Home', '/home'],
+         ['About', '/about'],
+         ['Profile', '/profile'],
+         ['More', '/more'],
+         ['Sign Out', '/'],
         ]}
       />
       <div className='container d-flex align-items-center justify-content-center mt-5 h-100'>
@@ -39,33 +41,14 @@ const Create = (props) => {
         </div>
         <div className='col'>
           <h3>Submit your work</h3>
-          <InputField setterFunction={setImage} type={'file'} />
-          <InputField setterFunction={setTitle} placeholder='Title of work' />
-          <InputField setterFunction={setArtist} placeholder='Artist' />
-          <InputField
-            setterFunction={setDescription}
-            placeholder='Description'
-          />
-          <TypeDropdown
-            setterFunction={setType}
-            value={type}
-            options={[
-              'Sculptures',
-              'Paintings',
-              'Virtual',
-              'Modern',
-              'Landscapes',
-            ]}
-          />
-          <div className='form-check mb-3'>
-            <label className='form-check-label' for='original'>
-              Original work?
-            </label>
-            <input type='checkbox' className='form-check-input' />
+          <InputField setterFunction={setImage} type={'file'}/>
+          <InputField setterFunction={setTitle} placeholder='Title of work'/>
+          <InputField setterFunction={setArtist} placeholder='Artist'/>
+          <InputField setterFunction={setDescription} placeholder='Description'/>
+          <div className='d-flex mt-1'>
+            <TypeDropdown setterFunction={ setType } value={type} options={['Sculptures', 'Paintings', 'Virtual', 'Modern', 'Lanscapes']}/>
+            <button className="btn btn-danger w-100 ms-2" onClick={upload}>Submit</button>
           </div>
-          <button className='btn btn-danger w-100' onClick={upload}>
-            Submit
-          </button>
         </div>
       </div>
     </div>
