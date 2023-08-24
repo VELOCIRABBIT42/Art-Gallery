@@ -1,4 +1,4 @@
-const db = require('../../db');
+const dbBase = require('../../db');
 const authController = require('../authController.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -11,7 +11,7 @@ dotenv.config();
 const accessTokenSecret = process.env.accessTokenSecret;
 const refreshTokenSecret = process.env.refreshTokenSecret;
 
-authController.refresh = async function (req, res, next, db = db) {
+authController.refresh = async function (req, res, next, db = dbBase) {
   const { username, password } = req.body;
   const cookies = req.cookies;
 

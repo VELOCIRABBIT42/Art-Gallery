@@ -5,9 +5,11 @@ const PORT = 3000;
 const authRouter = require('./routers/authRouter');
 const galleryRouter = require('./routers/galleryRouter');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use('/art/auth', authRouter);
 

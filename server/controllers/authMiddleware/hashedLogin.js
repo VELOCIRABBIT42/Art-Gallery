@@ -1,4 +1,4 @@
-const db = require('../../db');
+const dbBase = require('../../db');
 const authController = require('../authController.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -10,8 +10,10 @@ dotenv.config();
 const accessTokenSecret = process.env.accessTokenSecret;
 const refreshTokenSecret = process.env.refreshTokenSecret;
 
-authController.hashedLogin = async function (req, res, next, db = db) {
+authController.hashedLogin = async function (req, res, next, db = dbBase) {
   const { username, password } = req.body;
+  // if (accessTokenSecret) console.log('Incorect import');
+  // if (refreshTokenSecret) console.log('Incorect import');
   try {
     const user = await db.query(
       `SELECT * FROM users WHERE username = '${username}'`,

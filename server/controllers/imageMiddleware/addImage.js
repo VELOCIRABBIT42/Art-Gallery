@@ -2,13 +2,14 @@ const imageController = require('../imageController.js');
 const db = require('../../db.js');
 
 //p
-imageController.addImage = async (req, res, next, db = db) => {
-  const { title, url, description, users_user_id, artist, filter } = req.body;
+imageController.addImage = async (req, res, next) => {
+  console.log('BODY', req.body);
+  const { title, url, description, artist, filter } = req.body;
 
-  // const users_user_id = cookie.parse(id);
+  const users_user_id = req.cookies.id;
 
   /*
-{"title" : "test", "url" : "test", "description" : "pretty", "users_user_id" : "1"}
+{"title" : "test", "url" : "test", "description" : "pretty", "artist": "test", "filter": "Sculpture"}
 */
 
   try {
@@ -17,7 +18,6 @@ imageController.addImage = async (req, res, next, db = db) => {
     const values = [title, url, description, users_user_id, artist, filter];
     const results = await db.query(query, values);
     res.locals.newImage = results.rows[0];
-    console.log('RESULTS ROWS', results.rows);
     return next();
   } catch (err) {
     return next({
@@ -31,3 +31,9 @@ imageController.addImage = async (req, res, next, db = db) => {
 };
 
 module.exports = imageController.addImage;
+
+// ['Sculptures', ()=> filterImagesByCategory('Sculptures')],
+// ['Paintings', ()=> filterImagesByCategory('Paintings')],
+// ['Virtual', ()=> filterImagesByCategory('Virtual')],
+// ['Modern', ()=> filterImagesByCategory('Modern')],
+// ['Landscapes', ()=> filterImagesByCategory('Landscapes')],

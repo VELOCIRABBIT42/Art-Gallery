@@ -29,22 +29,14 @@ authRouter.post(
   },
 );
 
-//Decrypting the jwt.
-/*try{
-  const decoded = jwt.verify (refreshToken, refreshTokenSecret);
-} catach (err){
-  console.log('JWT Verification Failed', err)
-}
-*/
-
 // // POST REQUEST TO REFRESH
 authRouter.post('/refresh', authController.refresh, (req, res) => {
   res.status(200).json(res.locals);
 });
 
-// // POST REQUEST TO LOGOUT
-authRouter.post('/logout', authController.logout, (req, res) => {
-  res.status(200).json(res.locals);
+// // GET REQUEST TO LOGOUT
+authRouter.get('/logout', authController.logout, (req, res) => {
+  res.status(200).json('cookie cleared');
 });
 
 module.exports = authRouter;

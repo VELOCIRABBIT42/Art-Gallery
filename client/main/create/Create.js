@@ -2,20 +2,24 @@ import React from 'react';
 import { useState } from 'react';
 import InputField from './InputField';
 import uploadFile from './uploadFile';
-import Navbar from '../../utility/Navbar'
+import Navbar from '../../utility/Navbar';
+import TypeDropdown from './TypeDropdown';
 
 const Create = ( props )=>{
   const [image, setImage] = useState();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [artist, setArtist] = useState('');
+  const [type, setType] = useState('Select Type');
 
   const upload = async (event) => {
-    uploadFile({ image, title, description, artist });
+    if (type === 'Select Type') return;
+    uploadFile({ image, title, description, artist, type });
 
     setTitle('');
     setDescription('');
     setArtist('');
+    setType('Select Type');
   };
 
   return (
@@ -39,6 +43,7 @@ const Create = ( props )=>{
           <InputField setterFunction={setTitle} placeholder='Title of work'/>
           <InputField setterFunction={setArtist} placeholder='Artist'/>
           <InputField setterFunction={setDescription} placeholder='Description'/>
+          <TypeDropdown setterFunction={ setType } value={type} options={['Sculptures', 'Paintings', 'Virtual', 'Modern', 'Lanscapes']}/>
           <div className='form-check mb-3'>
             <label className="form-check-label" for='original'>Original work?</label>
             <input type="checkbox" className="form-check-input"/>
