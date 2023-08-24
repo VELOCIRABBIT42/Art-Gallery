@@ -12,17 +12,28 @@ authRouter.post('/signup', authController.signup, (req, res) => {
 });
 
 // POST REQUEST TO LOG IN, DATABASE MIDDLEWARE
-authRouter.post('/login', authController.login, (req, res) => {
-  res.status(200).json(res.locals.loginAttempt);
-});
+// authRouter.post('/login', authController.login, (req, res) => {
+//   res.status(200).json(res.locals.loginAttempt);
+// });
 
 // POST REQUEST TO HASHED LOGIN
 authRouter.post('/hashedLogin', authController.hashedLogin, (req, res) => {
   //if conditional
   //if res.locals.success = true send 200
-  //else send 400
-  res.status(200).json(res.locals);
+  if (res.locals.loginAttempt) {
+    res.status(200).json('Successful Login');
+  } else {
+    res.status(400).json('Login Error');
+  }
 });
+
+//Decrypting the jwt.
+/*try{
+  const decoded = jwt.verify (refreshToken, refreshTokenSecret);
+} catach (err){
+  console.log('JWT Verification Failed', err)
+}
+*/
 
 // // POST REQUEST TO REFRESH
 authRouter.post('/refresh', authController.refresh, (req, res) => {

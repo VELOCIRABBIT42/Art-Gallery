@@ -1,5 +1,5 @@
 const { isWebTarget } = require('webpack-dev-server');
-const imageController = require('/root/src/Art-Gallery/server/controllers/imageController.js');
+const imageController = require('/root/src/Art-Gallery/server/controllers/imageMiddleware/getImages.js');
 const db = require('/root/src/Art-Gallery/server/db.js');
 
 jest.mock('/root/src/Art-Gallery/server/db.js', () => ({
@@ -31,26 +31,28 @@ describe('imageController', () => {
       const mockNext = jest.fn();
 
       //The actual function call and passed in variables
-      await imageController.getImages(mockReq, mockRes, mockNext);
+      await imageController(mockReq, mockRes, mockNext);
 
-      //Expected results
+      //Check to ensure the function is successfully called, and with the specific argument
       expect(db.query).toHaveBeenCalledWith('SELECT * FROM images');
+      //Recursively compares all properties to determine a deep equality between the mock and locals
       expect(mockRes.locals.images).toEqual(mockImages);
+      //Checks to make sure that the next property has been called
       expect(mockNext).toHaveBeenCalled();
     });
     //Emulate the catch portion of the function
     it('Should catch and handle any error ', async () => {
       //Make a mock error
-
       const mockError = new Error('Database error');
       db.query.mockRejectedValueOnce(mockError);
 
+      //mock variables
       const mockReq = {};
       const mockRes = { locals: {} };
       const mockNext = jest.fn();
-
-      await imageController.getImages(mockReq, mockRes, mockNext);
-
+      //Running the actual function
+      await imageController(mockReq, mockRes, mockNext);
+      //Expected results of the function to have been run with the error message
       expect(mockNext).toHaveBeenCalledWith({
         log: expect.stringContaining('imageControllers.getImages: ERROR:'),
         status: 400,
@@ -59,4 +61,3 @@ describe('imageController', () => {
     });
   });
 });
-

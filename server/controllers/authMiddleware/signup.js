@@ -2,7 +2,7 @@ const db = require('../../db');
 const authController = require('../authController.js');
 const bcrypt = require('bcrypt');
 
-authController.signup = async function (req, res, next) {
+authController.signup = async function (req, res, next, db) {
   // Sanitize input by verifying each expected param exists on request
   // Sanitize input by verifying typeof each param on request
   //{"username: briantest", "password":"1234"}
@@ -27,7 +27,6 @@ authController.signup = async function (req, res, next) {
       next();
     }
   } catch (err) {
-    console.log('authController.signup ERROR', err);
     return next({
       log: `authController.signup ERROR: ${err}`,
       status: 400,
