@@ -1,8 +1,9 @@
 const imageController = require('../imageController.js');
 const db = require('../../db.js');
 
-imageController.addImage = async (req, res, next) => {
-  const { title, url, description, users_user_id } = req.body;
+//p
+imageController.addImage = async (req, res, next, db) => {
+  const { title, url, description, users_user_id, artist, filter } = req.body;
 
   // const users_user_id = cookie.parse(id);
 
@@ -11,9 +12,9 @@ imageController.addImage = async (req, res, next) => {
 */
 
   try {
-    const query = `INSERT INTO images (title, url, description, users_user_id)
-    VALUES ($1, $2, $3, $4) RETURNING *`;
-    const values = [title, url, description, users_user_id];
+    const query = `INSERT INTO images (title, url, description, users_user_id, artist, filter)
+    VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
+    const values = [title, url, description, users_user_id, artist, filter];
     const results = await db.query(query, values);
     res.locals.newImage = results.rows[0];
     console.log('RESULTS ROWS', results.rows);
