@@ -10,15 +10,10 @@ authRouter.post('/signup', authController.signup, (req, res) => {
   res.status(200).send('Account Created');
 });
 
-// POST REQUEST TO LOG IN, DATABASE MIDDLEWARE
-// authRouter.post('/login', authController.login, (req, res) => {
-//   res.status(200).json(res.locals.loginAttempt);
-// });
-
 // POST REQUEST TO HASHED LOGIN
 authRouter.post(
-  '/hashedLogin',
-  authController.hashedLogin,
+  '/login',
+  authController.login,
   authController.setCookie,
   (req, res) => {
     if (res.locals.loginAttempt) {
@@ -29,22 +24,14 @@ authRouter.post(
   },
 );
 
-//Decrypting the jwt.
-/*try{
-  const decoded = jwt.verify (refreshToken, refreshTokenSecret);
-} catach (err){
-  console.log('JWT Verification Failed', err)
-}
-*/
-
 // // POST REQUEST TO REFRESH
-authRouter.post('/refresh', authController.refresh, (req, res) => {
-  res.status(200).json(res.locals);
+authRouter.get('/refresh', authController.refresh, (req, res) => {
+  res.status(200).json('new refresh token generated');
 });
 
-// // POST REQUEST TO LOGOUT
-authRouter.post('/logout', authController.logout, (req, res) => {
-  res.status(200).json(res.locals);
+// // GET REQUEST TO LOGOUT
+authRouter.get('/logout', authController.logout, (req, res) => {
+  res.status(200).json('cookie cleared');
 });
 
 module.exports = authRouter;
