@@ -3,6 +3,8 @@ import CardComponent from './CardComponent';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../utility/Navbar';
 import Sidebar from '../../utility/Sidebar';
+import cachedDatabase from '../../utility/cachedDatabase';
+import { filterByCategory } from './filterImages';
 
 const Home = (props) => {
   const [images, setImages] = useState([]);
@@ -11,23 +13,17 @@ const Home = (props) => {
   const handleClick = (title) => {
     navigate(`/product/${title}`);
   };
-
-  const loadImages = async ()=>{
-    try {
-      const response = await fetch('/gallery') // Replace with the API endpoint pertaining to PostgreSQL
-      response.body = await response.body.json();
-      if (!Array.isArray(response.body)) return;
   
-      setImages(response.body);
-    }
-    catch (e) {
-      console.error('Error fetching images:', e);
-    }
-  }
-
   useEffect(() => {
-    loadImages();
+    cachedDatabase.callbackFunctions.push(setImages);
+    cachedDatabase.loadServerValues();
   }, []);
+
+  const filterImagesByCategory = (category) => {
+    const filtered = filterByCategory(category, cachedDatabase.serverDataObject);
+    //set state with filtered images 
+    setImages(filtered);
+};
 
   return (
     <div className='d-flex flex-column'>
@@ -44,12 +40,11 @@ const Home = (props) => {
         <Sidebar
           title='Filter'
           elementData={[
-            ['Sculptures', ()=>{}],
-            ['Paintings', ()=>{}],
-            ['Virtual', ()=>{}],
-            ['Modern', ()=>{}],
-            ['Lanscapes', ()=>{}],
-            ['Events', ()=>{}],
+            ['Sculptures', ()=> filterImagesByCategory('Sculptures')],
+            ['Paintings', ()=> filterImagesByCategory('Paintings')],
+            ['Virtual', ()=> filterImagesByCategory('Virtual')],
+            ['Modern', ()=> filterImagesByCategory('Modern')],
+            ['Landscapes', ()=> filterImagesByCategory('Landscapes')],
           ]}
         />
         <div className='container'>
@@ -61,7 +56,6 @@ const Home = (props) => {
         </div>
       </div>
     </div>
-
   );
 };
 

@@ -12,6 +12,8 @@ const refreshTokenSecret = process.env.refreshTokenSecret;
 
 authController.hashedLogin = async function (req, res, next) {
   const { username, password } = req.body;
+  // if (accessTokenSecret) console.log('Incorect import');
+  // if (refreshTokenSecret) console.log('Incorect import');
   try {
     const user = await db.query(
       `SELECT * FROM users WHERE username = '${username}'`,

@@ -1,7 +1,7 @@
 const imageController = require('../imageController.js');
-const db = require('../../db.js');
+const dbBase = require('../../db.js');
 
-imageController.getImages = async (req, res, next, db) => {
+imageController.getImages = async (req, res, next, db=dbBase) => {
   try {
     const query = `SELECT * FROM images`;
     const results = await db.query(query);

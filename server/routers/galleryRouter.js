@@ -8,8 +8,8 @@ galleryRouter.get('/', imageController.getImages, (req, res) => {
 });
 
 galleryRouter.post('/addimage', imageController.addImage, (req, res) => {
-  console.log('res.locals.newImage', res.locals.newImage);
-  res.status(200).json(res.locals.newImage);
+  // console.log('res.locals.newImage', res.locals.newImage);
+  res.status(200).json('image added');
 });
 
 module.exports = galleryRouter;
