@@ -12,6 +12,7 @@ const About = () => {
              ['Create', '/create'],
              ['Profile', '/profile'],
              ['More', '/more'],
+             ['Sign Out', '/'],
             ]}
           />
         </div>

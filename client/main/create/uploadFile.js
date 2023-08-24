@@ -19,14 +19,21 @@ const uploadFile = async ({
     const response = await uploadBytes(imageRef, image);
     const url = await getDownloadURL(response.ref);
     
-    await fetch('/art/gallery/addimage', {
+    const createResponse = await fetch('/art/gallery/addimage', {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, description, artist, url, filter: type }),
     });
+    if (createResponse.ok){
+      alert('Image Created');
+    }
+    else{
+      alert('Image Failed to create');
+    }
   }
   catch (err) {
     console.log(err);
+    alert('Image Failed to create');
   }
 };
 

@@ -1,4 +1,4 @@
-const db = require('../../db');
+const dbBase = require('../../db');
 const authController = require('../authController.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -10,7 +10,7 @@ dotenv.config();
 const accessTokenSecret = process.env.accessTokenSecret;
 const refreshTokenSecret = process.env.refreshTokenSecret;
 
-authController.hashedLogin = async function (req, res, next) {
+authController.login = async function (req, res, next, db = dbBase) {
   const { username, password } = req.body;
   // if (accessTokenSecret) console.log('Incorect import');
   // if (refreshTokenSecret) console.log('Incorect import');
@@ -23,7 +23,7 @@ authController.hashedLogin = async function (req, res, next) {
 
     if (user.rows.length > 0) {
       const match = await bcrypt.compare(password, user.rows[0].password);
-      res.locals.loginAttempt = true;
+      res.locals.loginAttempt = match;
     } else {
       res.locals.loginAttempt = false;
       return next();
@@ -58,7 +58,7 @@ authController.hashedLogin = async function (req, res, next) {
     return next();
   } catch (err) {
     return next({
-      log: `authController.hashedLogin ERROR: ${err}`,
+      log: `authController.login ERROR: ${err}`,
       status: 400,
       message: {
         err: 'Error with username or password',
@@ -67,4 +67,4 @@ authController.hashedLogin = async function (req, res, next) {
   }
 };
 
-module.exports = authController.hashedLogin;
+module.exports = authController.login;

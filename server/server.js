@@ -7,7 +7,6 @@ const galleryRouter = require('./routers/galleryRouter');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -37,7 +36,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
-/**
- * ask about *, and proxy server purpose, ask about static
- */
