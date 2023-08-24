@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import cachedDatabase from '../../utility/cachedDatabase';
 
 const ProductComponent = () => {
   const [images, setImages] = useState({});
@@ -8,13 +9,13 @@ const ProductComponent = () => {
   const location = useLocation();
   let title = location.pathname.slice(9).replaceAll('%20', ' ');
 
-  useEffect(async () => {
+  useEffect(() => {
+    //Access data from store
     try {
-      const response = await fetch('/gallery') // Replace with the API endpoint pertaining to PostgreSQL
-      setImages( response.data.filter((obj) => obj.title === title )[0] );
+      setImages( cachedDatabase.serverDataObject.filter((obj) => obj.title === title )[0] );
     }
     catch (e){
-      console.error('Error fetching images:', error);
+      console.error('Error fetching images:', e);
     }
   }, []);
 

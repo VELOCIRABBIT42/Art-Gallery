@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import Navbar from '../../utility/Navbar'
 
 const About = () => {

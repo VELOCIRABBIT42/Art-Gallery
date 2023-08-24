@@ -7,7 +7,7 @@ const Login = (props)=>{
 
   const validate = async (username, password) => {
     try {
-      const response = await fetch('/auth/hashedLogin', {
+      const response = await fetch('/art/auth/hashedLogin', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -28,6 +28,7 @@ const Login = (props)=>{
       srcImg='https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947_1280.jpg'
       promp='Sign into your account'
       onSubmit={validate}
+      buttonPrompt='Login'
       >
         <p>Don't have an account? <a href="#" onClick={()=> navigate('/signup')}>Sign up</a></p>
       </UserDetailsForm>

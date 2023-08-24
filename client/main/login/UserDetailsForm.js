@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PasswordField from './PasswordField';
 import UsernameField from './UsernameField';
 
-const UserDetailsForm = ({srcImg, promp, onSubmit, children})=>{
+const UserDetailsForm = ({srcImg, promp, buttonPrompt, onSubmit, children})=>{
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
@@ -19,9 +19,8 @@ const UserDetailsForm = ({srcImg, promp, onSubmit, children})=>{
       <h6>{promp}</h6>
       <UsernameField setUsername={setUsername}/>
       <PasswordField setPassword={setPassword}/>
-      <button onClick={()=>onSubmit(username, password)} className='btn btn-danger w-100 mb-2'>Login</button>
+      <button onClick={()=>onSubmit(username, password)} className='btn btn-danger w-100 mb-2'>{buttonPrompt}</button>
       {children}
-      {/* <p>Don't have an account? <a href="#" onClick={()=> navigate('/signup')}>Sign up</a></p> */}
     </div>
   </div>)
 };
