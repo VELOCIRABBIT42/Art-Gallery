@@ -2,7 +2,7 @@ const db = require('../../db');
 const authController = require('../authController.js');
 const bcrypt = require('bcrypt');
 
-authController.signup = async function (req, res, next) {
+authController.signup = async function (req, res, next, db = db) {
   // Sanitize input by verifying each expected param exists on request
   // Sanitize input by verifying typeof each param on request
   //{"username": "test", "password":"1234"}

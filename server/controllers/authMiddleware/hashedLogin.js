@@ -10,7 +10,7 @@ dotenv.config();
 const accessTokenSecret = process.env.accessTokenSecret;
 const refreshTokenSecret = process.env.refreshTokenSecret;
 
-authController.hashedLogin = async function (req, res, next) {
+authController.hashedLogin = async function (req, res, next, db = db) {
   const { username, password } = req.body;
   try {
     const user = await db.query(

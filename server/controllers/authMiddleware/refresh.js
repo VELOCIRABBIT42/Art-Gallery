@@ -11,7 +11,7 @@ dotenv.config();
 const accessTokenSecret = process.env.accessTokenSecret;
 const refreshTokenSecret = process.env.refreshTokenSecret;
 
-authController.refresh = async function (req, res, next, db) {
+authController.refresh = async function (req, res, next, db = db) {
   const { username, password } = req.body;
   const cookies = req.cookies;
 

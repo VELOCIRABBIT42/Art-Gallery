@@ -2,7 +2,7 @@ const imageController = require('../imageController.js');
 const db = require('../../db.js');
 
 //p
-imageController.addImage = async (req, res, next, db) => {
+imageController.addImage = async (req, res, next, db = db) => {
   const { title, url, description, users_user_id, artist, filter } = req.body;
 
   // const users_user_id = cookie.parse(id);
