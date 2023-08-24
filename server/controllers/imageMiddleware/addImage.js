@@ -1,10 +1,9 @@
 const imageController = require('../imageController.js');
 const db = require('../../db.js');
 
-
 //p
 imageController.addImage = async (req, res, next) => {
-  console.log("BODY", req.body);
+  console.log('BODY', req.body);
   const { title, url, description, artist, filter } = req.body;
 
   const users_user_id = req.cookies.id;
@@ -32,10 +31,3 @@ imageController.addImage = async (req, res, next) => {
 };
 
 module.exports = imageController.addImage;
-
-
-// ['Sculptures', ()=> filterImagesByCategory('Sculptures')],
-// ['Paintings', ()=> filterImagesByCategory('Paintings')],
-// ['Virtual', ()=> filterImagesByCategory('Virtual')],
-// ['Modern', ()=> filterImagesByCategory('Modern')],
-// ['Landscapes', ()=> filterImagesByCategory('Landscapes')],
