@@ -2,6 +2,8 @@ const { isWebTarget } = require('webpack-dev-server');
 const imageController = require('/root/src/Art-Gallery/server/controllers/imageMiddleware/getImages.js');
 const db = require('/root/src/Art-Gallery/server/db.js');
 
+
+//Create a mock db to use for the test
 jest.mock('/root/src/Art-Gallery/server/db.js', () => ({
   query: jest.fn(),
 }));

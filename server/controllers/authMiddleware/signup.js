@@ -2,10 +2,10 @@ const db = require('../../db');
 const authController = require('../authController.js');
 const bcrypt = require('bcrypt');
 
-authController.signup = async function (req, res, next, db) {
+authController.signup = async function (req, res, next) {
   // Sanitize input by verifying each expected param exists on request
   // Sanitize input by verifying typeof each param on request
-  //{"username: briantest", "password":"1234"}
+  //{"username": "test", "password":"1234"}
   try {
     const { username, password } = req.body;
     const query = `SELECT * FROM users WHERE username = '${username}'`;
