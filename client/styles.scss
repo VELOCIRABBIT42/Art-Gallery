@@ -11,15 +11,15 @@
 }
 
 .description {
-  color: #495057
+  color: #495057;
 }
 
 .artist {
-  color: #6c757d
+  color: #6c757d;
 }
 
 .card-text {
-  color: #495057
+  color: #495057;
 }
 
 .page-header {
@@ -35,4 +35,5 @@
 
 .hoverCard:hover {
   transform: scale(1.15);
+  z-index: 1;
 }
