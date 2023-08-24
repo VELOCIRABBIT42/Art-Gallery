@@ -10,7 +10,7 @@ dotenv.config();
 const accessTokenSecret = process.env.accessTokenSecret;
 const refreshTokenSecret = process.env.refreshTokenSecret;
 
-authController.hashedLogin = async function (req, res, next, db = dbBase) {
+authController.login = async function (req, res, next, db = dbBase) {
   const { username, password } = req.body;
   // if (accessTokenSecret) console.log('Incorect import');
   // if (refreshTokenSecret) console.log('Incorect import');
@@ -58,7 +58,7 @@ authController.hashedLogin = async function (req, res, next, db = dbBase) {
     return next();
   } catch (err) {
     return next({
-      log: `authController.hashedLogin ERROR: ${err}`,
+      log: `authController.login ERROR: ${err}`,
       status: 400,
       message: {
         err: 'Error with username or password',
@@ -67,4 +67,4 @@ authController.hashedLogin = async function (req, res, next, db = dbBase) {
   }
 };
 
-module.exports = authController.hashedLogin;
+module.exports = authController.login;

@@ -10,15 +10,10 @@ authRouter.post('/signup', authController.signup, (req, res) => {
   res.status(200).send('Account Created');
 });
 
-// POST REQUEST TO LOG IN, DATABASE MIDDLEWARE
-// authRouter.post('/login', authController.login, (req, res) => {
-//   res.status(200).json(res.locals.loginAttempt);
-// });
-
 // POST REQUEST TO HASHED LOGIN
 authRouter.post(
-  '/hashedLogin',
-  authController.hashedLogin,
+  '/login',
+  authController.login,
   authController.setCookie,
   (req, res) => {
     if (res.locals.loginAttempt) {
@@ -30,8 +25,8 @@ authRouter.post(
 );
 
 // // POST REQUEST TO REFRESH
-authRouter.post('/refresh', authController.refresh, (req, res) => {
-  res.status(200).json(res.locals);
+authRouter.get('/refresh', authController.refresh, (req, res) => {
+  res.status(200).json('new refresh token generated');
 });
 
 // // GET REQUEST TO LOGOUT

@@ -36,7 +36,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
-/**
- * ask about *, and proxy server purpose, ask about static
- */

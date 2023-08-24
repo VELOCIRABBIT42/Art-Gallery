@@ -1,18 +1,16 @@
 const dbBase = require('../../db');
 const authController = require('../authController.js');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-// AUTH STORAGE: Stretch: Add to an env
 const accessTokenSecret = process.env.accessTokenSecret;
 const refreshTokenSecret = process.env.refreshTokenSecret;
 
 authController.refresh = async function (req, res, next, db = dbBase) {
-  const { username, password } = req.body;
+  // const { username, password } = req.body;
   const cookies = req.cookies;
 
   if (!cookies.jwt)
@@ -31,7 +29,7 @@ authController.refresh = async function (req, res, next, db = dbBase) {
       {
         UserInfo: {
           username: decoded.username,
-          roles: decoded.roles,
+          user_id: decoded.user_id,
         },
       },
       accessTokenSecret,
@@ -39,9 +37,14 @@ authController.refresh = async function (req, res, next, db = dbBase) {
     );
     res.locals.accessToken = newAccessToken;
     return next();
-  } catch (error) {
-    console.log('Error during token refresh', error);
-    return next(error);
+  } catch (err) {
+    return next({
+      log: `authController.refresh ERROR: ${err}`,
+      status: 400,
+      message: {
+        err: 'Error with refresh',
+      },
+    });
   }
 };
 

@@ -1,6 +1,5 @@
 const dbBase = require('../../db');
 const authController = require('../authController.js');
-const jwt = require('jsonwebtoken');
 
 authController.logout = async function (req, res, next, db = dbBase) {
   const cookies = req.cookies;
@@ -9,13 +8,12 @@ authController.logout = async function (req, res, next, db = dbBase) {
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
     res.clearCookie('id', { httpOnly: true, sameSite: 'None', secure: true });
     return next();
-  } catch (error) {
-    console.log('Error during logout', error);
+  } catch (err) {
     return next({
-      log: `authController.hashedLogin ERROR: ${err}`,
+      log: `authController.logout ERROR: ${err}`,
       status: 400,
       message: {
-        err: 'Error with username or password',
+        err: 'Error with logout',
       },
     });
   }

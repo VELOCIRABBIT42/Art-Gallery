@@ -31,9 +31,3 @@ imageController.addImage = async (req, res, next) => {
 };
 
 module.exports = imageController.addImage;
-
-// ['Sculptures', ()=> filterImagesByCategory('Sculptures')],
-// ['Paintings', ()=> filterImagesByCategory('Paintings')],
-// ['Virtual', ()=> filterImagesByCategory('Virtual')],
-// ['Modern', ()=> filterImagesByCategory('Modern')],
-// ['Landscapes', ()=> filterImagesByCategory('Landscapes')],
