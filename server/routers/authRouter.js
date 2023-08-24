@@ -27,8 +27,11 @@ authRouter.post('/hashedLogin', authController.hashedLogin, (req, res) => {
   }
 });
 
+//Decrypting the jwt.
 /*try{
-  co
+  const decoded = jwt.verify (refreshToken, refreshTokenSecret);
+} catach (err){
+  console.log('JWT Verification Failed', err)
 }
 */
 
