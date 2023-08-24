@@ -27,7 +27,6 @@ authController.signup = async function (req, res, next) {
       next();
     }
   } catch (err) {
-    console.log('authController.signup ERROR', err);
     return next({
       log: `authController.signup ERROR: ${err}`,
       status: 400,
