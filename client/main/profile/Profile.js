@@ -12,6 +12,7 @@ const Profile = () => {
              ['Create', '/create'],
              ['About', '/about'],
              ['More', '/more'],
+             ['Sign Out', '/'],
             ]}
           />
         </div>

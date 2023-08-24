@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../utility/Navbar';
 import Sidebar from '../../utility/Sidebar';
 import cachedDatabase from '../../utility/cachedDatabase';
-import { filterByCategory } from './filterImages';
+import { filterImagesByCategory } from './filterImages';
 
 const Home = (props) => {
   const [images, setImages] = useState([]);
@@ -19,11 +19,6 @@ const Home = (props) => {
     cachedDatabase.loadServerValues();
   }, []);
 
-  const filterImagesByCategory = (category) => {
-    const filtered = filterByCategory(category, cachedDatabase.serverDataObject);
-    //set state with filtered images 
-    setImages(filtered);
-};
 
   return (
     <div className='d-flex flex-column'>
@@ -34,17 +29,19 @@ const Home = (props) => {
           ['About', '/about'],
           ['Profile', '/profile'],
           ['More', '/more'],
+          ['Sign Out', '/'],
         ]}
       />
       <div className='d-flex'>
         <Sidebar
           title='Filter'
           elementData={[
-            ['Sculptures', ()=> filterImagesByCategory('Sculptures')],
-            ['Paintings', ()=> filterImagesByCategory('Paintings')],
-            ['Virtual', ()=> filterImagesByCategory('Virtual')],
-            ['Modern', ()=> filterImagesByCategory('Modern')],
-            ['Landscapes', ()=> filterImagesByCategory('Landscapes')],
+            ['None', ()=> setImages(cachedDatabase.serverDataObject)],
+            ['Sculptures', ()=> filterImagesByCategory('Sculptures', setImages)],
+            ['Paintings', ()=> filterImagesByCategory('Paintings', setImages)],
+            ['Virtual', ()=> filterImagesByCategory('Virtual', setImages)],
+            ['Modern', ()=> filterImagesByCategory('Modern', setImages)],
+            ['Landscapes', ()=> filterImagesByCategory('Landscapes', setImages)],
           ]}
         />
         <div className='container'>

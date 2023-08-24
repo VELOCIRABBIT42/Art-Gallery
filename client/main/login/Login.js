@@ -7,7 +7,7 @@ const Login = (props)=>{
 
   const validate = async (username, password) => {
     try {
-      const response = await fetch('/art/auth/hashedLogin', {
+      const response = await fetch('/art/auth/login', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
